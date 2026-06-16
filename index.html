@@ -233,7 +233,10 @@ function enviarPedido(){
 
     console.error("Erro Firebase:", erro);
 
-    alert("Erro ao enviar pedido.");
+    alert(
+        "Erro ao enviar pedido:\n\n" +
+        erro.message
+    );
 
 });
 
