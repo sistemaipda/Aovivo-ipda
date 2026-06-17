@@ -1,0 +1,681 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IPDA Setorial Contagem Centro - Transmissão Ao Vivo</title>
+
+<meta name="description" content="Transmissões ao vivo, pedidos de oração e programação dos cultos da IPDA Setorial Contagem Centro.">
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:#eef2f7;
+    color:#333;
+}
+
+header{
+    background:#0d47a1;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:700px;
+    margin:20px auto;
+    padding:15px;
+}
+
+footer{
+    margin-top:40px;
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+}
+
+footer h3{
+    margin-top:0;
+}
+
+footer p{
+    margin:8px 0;
+}
+
+.cartaz{
+    position:relative;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    margin-bottom:20px;
+}
+#cultos-semanais{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+#cultos-semanais h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:#0d47a1;
+}
+
+.slider{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.slider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:opacity .3s ease;
+}
+
+.bolinhas{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+    z-index:10;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:rgba(255,255,255,.45);
+    transition:all .3s ease;
+}
+
+.dot.ativo{
+    background:white;
+    transform:scale(1.3);
+    box-shadow:0 0 8px rgba(255,255,255,.8);
+}
+
+#contador{
+    text-align:right;
+    color:#666;
+    font-size:14px;
+    margin-top:-5px;
+    margin-bottom:10px;
+}
+
+.cartaz img{
+    width:100%;
+    display:block;
+}
+
+.aovivo{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:red;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:linear-gradient(
+        135deg,
+        #0d47a1,
+        #1565c0
+    );
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:10px;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+input,
+textarea{
+    width:100%;
+    padding:10px;
+    box-sizing:border-box;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+#mensagem{
+    text-align:center;
+    margin-top:20px;
+}
+
+#versiculo-dia{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+#versiculo-dia h2{
+    color:#0d47a1;
+    margin-bottom:15px;
+}
+
+#texto-versiculo{
+    font-size:18px;
+    font-style:italic;
+    line-height:1.6;
+    color:#333;
+}
+
+#referencia-versiculo{
+    margin-top:15px;
+    font-weight:bold;
+    color:#0d47a1;
+}
+
+
+#oracao{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+header{
+    background:linear-gradient(135deg,#0d47a1,#1565c0);
+    color:white;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+.logo-area{
+    background:white;
+    border-radius:15px;
+    padding:10px;
+    margin-bottom:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+#logo-igreja{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+</style></head><body><header>
+
+    <div class="logo-area">
+        <img
+        src="logo.png"
+        alt="Logo Igreja"
+        id="logo-igreja">
+    </div>
+
+<div id="cultos-semanais">
+
+    <h2> Cultos Semanais</h2>
+
+    <div class="slider">
+
+        <img id="slide"
+        src="01.jpg"
+        alt="Cultos Semanais">
+
+        <div class="bolinhas">
+
+            <span class="dot ativo"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <h3>Transmissão Ao Vivo</h3>
+
+</header><div class="container"><div id="culto"></div>
+
+<div id="mensagem">
+    Carregando transmissão...
+</div>
+
+<div id="oracao">
+
+    <h2>🙏 Pedido de Oração</h2>
+
+    <input
+    id="nome"
+    placeholder="Seu nome">
+
+    <textarea
+id="pedido"
+placeholder="Digite seu pedido"
+rows="5"
+maxlength="100"></textarea>
+
+<div id="contador">0/100</div>
+
+    <button onclick="enviarPedido()">
+        Enviar Pedido
+    </button>
+
+</div>
+
+<div id="versiculo-dia">
+
+    <h2>📖 Versículo do Dia</h2>
+
+    <p id="texto-versiculo"></p>
+
+    <div id="referencia-versiculo"></div>
+
+</div>
+
+</div><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script><script>
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyC5Ylv9RyBfZ3BN5IgDWGqrldQR9yIbFRA",
+
+  authDomain: "ipda-setorial-contagem.firebaseapp.com",
+
+  databaseURL:
+  "https://ipda-setorial-contagem-default-rtdb.firebaseio.com",
+
+  projectId: "ipda-setorial-contagem",
+
+  storageBucket:
+  "ipda-setorial-contagem.appspot.com",
+
+  messagingSenderId:
+  "815344482867",
+
+  appId:
+  "1:815344482867:web:221f5624f89c1e25468146"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+const pedidoInput = document.getElementById("pedido");
+const contador = document.getElementById("contador");
+
+pedidoInput.addEventListener("input", () => {
+    contador.innerText =
+        pedidoInput.value.length + "/100";
+});
+
+db.ref("aovivo/transmissao")
+.on("value",(snapshot)=>{
+
+    let culto = snapshot.val();
+
+    if(!culto){
+
+        document.getElementById("mensagem")
+        .innerHTML = "Nenhuma transmissão cadastrada.";
+
+        return;
+    }
+
+    if(!culto.ativo){
+
+        document.getElementById("culto").innerHTML = "";
+
+        document.getElementById("mensagem")
+        .innerHTML = "Nenhuma transmissão no momento.";
+
+        return;
+    }
+
+    document.getElementById("mensagem").innerHTML = "";
+
+    document.getElementById("culto")
+    .innerHTML = `
+
+        <div class="cartaz">
+
+            <img src="${culto.cartaz}">
+
+            <div class="aovivo">
+                🔴 AO VIVO
+            </div>
+
+        </div>
+
+        <h2 style="text-align:center;">
+            ${culto.titulo}
+        </h2>
+<button
+onclick="ouvirCulto('${culto.youtube}')">
+
+    ▶ OUVIR AGORA
+
+</button>
+
+<div id="player-live"></div>
+
+`;
+
+});
+
+
+function enviarPedido(){
+
+    if(localStorage.getItem("pedidoEnviado")){
+        alert("Este navegador já enviou um pedido.");
+        return;
+    }
+
+    const nome =
+    document.getElementById("nome").value.trim();
+
+    const pedido =
+    document.getElementById("pedido").value.trim();
+
+    if(nome === "" || pedido === ""){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    if(pedido.length > 100){
+        alert("O pedido deve ter no máximo 100 caracteres.");
+        return;
+    }
+
+    db.ref("pedidosOracao")
+    .push({
+        nome:nome,
+        pedido:pedido,
+        data:new Date().toISOString()
+    })
+
+    .then(()=>{
+
+        localStorage.setItem(
+            "pedidoEnviado",
+            "sim"
+        );
+
+        alert("Pedido enviado com sucesso.");
+
+        document.getElementById("nome").value = "";
+        document.getElementById("pedido").value = "";
+
+    })
+
+    .catch((erro)=>{
+
+        console.error("Erro Firebase:", erro);
+
+        alert(
+            "Erro ao enviar pedido:\n\n" +
+            erro.message
+        );
+
+    });
+
+}
+
+function ouvirCulto(link){
+
+    let videoId = "";
+
+    if(link.includes("watch?v=")){
+        videoId = link.split("watch?v=")[1].split("&")[0];
+    }
+    else if(link.includes("youtu.be/")){
+        videoId = link.split("youtu.be/")[1].split("?")[0];
+    }
+    else if(link.includes("/live/")){
+        videoId = link.split("/live/")[1].split("?")[0];
+    }
+
+    if(!videoId){
+        alert("Link do YouTube inválido.");
+        return;
+    }
+
+    document.getElementById("player-live").innerHTML = `
+        <div style="
+            margin-top:20px;
+            position:relative;
+            padding-bottom:56.25%;
+            height:0;
+            overflow:hidden;
+            border-radius:15px;
+            box-shadow:0 2px 10px rgba(0,0,0,.2);
+        ">
+            <iframe
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                style="
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    width:100%;
+                    height:100%;
+                ">
+            </iframe>
+        </div>
+    `;
+}
+
+const imagens = [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+];
+
+imagens.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+let slideAtual = 0;
+
+function trocarSlide(){
+
+    const slide =
+    document.getElementById("slide");
+
+    slide.style.opacity = "0";
+
+    setTimeout(() => {
+
+        slideAtual =
+        (slideAtual + 1) % imagens.length;
+
+        slide.src =
+        imagens[slideAtual];
+
+        document
+        .querySelectorAll(".dot")
+        .forEach(dot =>
+            dot.classList.remove("ativo")
+        );
+
+        document
+        .querySelectorAll(".dot")
+        [slideAtual]
+        .classList.add("ativo");
+
+        slide.onload = () => {
+            slide.style.opacity = "1";
+        };
+
+    }, 300);
+}
+
+setInterval(trocarSlide, 5000);
+
+const versiculos = [
+
+{
+texto:"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito.",
+ref:"João 3:16"
+},
+
+{
+texto:"O Senhor é o meu pastor; nada me faltará.",
+ref:"Salmos 23:1"
+},
+
+{
+texto:"Tudo posso naquele que me fortalece.",
+ref:"Filipenses 4:13"
+},
+
+{
+texto:"Buscai ao Senhor enquanto se pode achar.",
+ref:"Isaías 55:6"
+},
+
+{
+texto:"Perto está o Senhor de todos os que o invocam.",
+ref:"Salmos 145:18"
+},
+
+{
+texto:"A alegria do Senhor é a vossa força.",
+ref:"Neemias 8:10"
+},
+
+{
+texto:"Entrega o teu caminho ao Senhor; confia nele.",
+ref:"Salmos 37:5"
+},
+
+{
+texto:"Bem-aventurados os limpos de coração.",
+ref:"Mateus 5:8"
+},
+
+{
+texto:"Não temas, porque eu sou contigo.",
+ref:"Isaías 41:10"
+},
+
+{
+texto:"Clama a mim, e responder-te-ei.",
+ref:"Jeremias 33:3"
+},
+
+{
+texto:"O choro pode durar uma noite, mas a alegria vem pela manhã.",
+ref:"Salmos 30:5"
+},
+
+{
+texto:"Lâmpada para os meus pés é tua palavra.",
+ref:"Salmos 119:105"
+},
+
+{
+texto:"Se Deus é por nós, quem será contra nós?",
+ref:"Romanos 8:31"
+},
+
+{
+texto:"O meu socorro vem do Senhor.",
+ref:"Salmos 121:2"
+},
+
+{
+texto:"Sede fortes e corajosos.",
+ref:"Josué 1:9"
+}
+
+];
+
+function carregarVersiculoDoDia(){
+
+    const hoje = new Date();
+
+    const inicioAno =
+        new Date(hoje.getFullYear(),0,1);
+
+    const diaDoAno =
+        Math.floor(
+            (hoje - inicioAno) /
+            86400000
+        );
+
+    const indice =
+        diaDoAno % versiculos.length;
+
+    document.getElementById(
+        "texto-versiculo"
+    ).innerText =
+        '"' +
+        versiculos[indice].texto +
+        '"';
+
+    document.getElementById(
+        "referencia-versiculo"
+    ).innerText =
+        versiculos[indice].ref;
+}
+
+carregarVersiculoDoDia();
+
+</script>
+
+<footer>
+
+    <h3>Igreja Pentecostal Deus é Amor</h3>
+
+    <p>
+        Endereço: Avenida João de Deus Costa,
+        Nº 300A - Centro
+        Contagem/MG
+    </p>
+
+    <p>
+        Telefone:
+        (31) 9 8677-5326
+    </p>
+
+</footer>
+
+</body>
+</html>
